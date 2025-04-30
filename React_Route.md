@@ -89,6 +89,7 @@ const router = createBrowserRouter([
 **Note**: We can use components directly in `element`, and it's recommended to avoid using raw HTML tags directly for better practices.
 
 After creating routes, we have to show the output using **`RouterProvider`**.
+Router provider makes sures our router works properly.
 
 ```jsx
 function App() {
@@ -97,24 +98,59 @@ function App() {
   );
 }
 ```
+At the end we have to use the path. For using paths in optimised way. 
+React provides component named `Link`for general use case and `NavLink` for nav.
+We can simply import them by their name from `react-router-dom`
 
+```jsx
+import { Link, NavLink } from 'react-router-dom';
+```
 ---
 
 ### Code overview:
 ```jsx
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { 
+  createBrowserRouter,RouterProvider,
+  Link,NavLink,
+  Outlet
+} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 
+const RootLayout = () => {
+  return (
+    <>
+      <nav>
+        <Link to="/">Home</Link>
+        <NavLink 
+          to="/about"
+          className={({ isActive }) => isActive ? 'active' : ''}
+        >
+          About
+        </NavLink>
+      </nav>
+      
+    </>
+  );
+};
+
 const router = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
-  { path: "/about", element: <AboutPage /> },
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "about", element: <AboutPage /> },
+    ],
+  },
 ]);
 
 function App() {
   return <RouterProvider router={router} />;
 }
+
+export default App;
 
 export default App;
 ```
