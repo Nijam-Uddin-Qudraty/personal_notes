@@ -89,7 +89,7 @@ const router = createBrowserRouter([
 **Note**: We can use components directly in `element`, and it's recommended to avoid using raw HTML tags directly for better practices.
 
 After creating routes, we have to show the output using **`RouterProvider`**.
-Router provider makes sures our router works properly.
+Router provider makes sure our router works properly.
 
 ```jsx
 function App() {
@@ -98,7 +98,7 @@ function App() {
   );
 }
 ```
-At the end we have to use the path. For using paths in optimised way. 
+At the end we have to use the path. For using paths in optimized way. 
 React provides component named `Link`for general use case and `NavLink` for nav.
 We can simply import them by their name from `react-router-dom`
 
